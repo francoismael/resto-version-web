@@ -1,0 +1,131 @@
+/* Définition des couleurs nobles et élégantes */
+:root {
+    --color-main: #F4E1D2;    /* Beige doux et élégant */
+    --color-secondary: #A6B0A3; /* Gris clair vert, subtil et apaisant */
+    --color-dark: #2E2E2E;     /* Gris très foncé pour le texte et les éléments */
+    --color-highlight: #9A6B47; /* Or doux, rappelant les tons chaleureux */
+    --color-accent: #F4A261; /* Orange doré, pour un accent lumineux */
+    --color-background: #F7F7F7; /* Fond clair et léger pour créer un contraste */
+}
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Typographie moderne et lisible */
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header */
+h1, h2 {
+    color: var(--color-accent);
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: var(--color-secondary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-dark);
+    font-size: 1.1em;
+}
+
+th {
+    background-color: var(--color-dark);
+    color: var(--color-main);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-main);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--color-secondary);
+}
+
+tr:hover {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+/* Button Styling */
+button {
+    background-color: var(--color-highlight);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--color-dark);
+    transform: translateY(-2px);
+}
+
+/* Section Styling */
+.section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: var(--color-main);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Container Styling */
+.container {
+    width: 85%;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: var(--color-dark);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    color: var(--color-main);
+}
+
+/* Table Container */
+.table-container {
+    overflow-x: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    h1, h2 {
+        font-size: 2em;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}

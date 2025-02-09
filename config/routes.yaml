@@ -1,0 +1,23 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+
+# config/routes.yaml
+gestion_elements:
+    path: /gestion-elements
+    controller: App\Controller\GestionController::gestionElements
+
+
+statistiques:
+    path: /state
+    controller: App\Controller\StatistiquesController::statistiques
+
+index:
+    path: /
+    controller: App\Controller\AuthController::login
+
+
+auth_register:
+    path: /auth/register
+    controller: App\Controller\AuthController::register

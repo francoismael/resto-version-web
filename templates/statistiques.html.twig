@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau des Statistiques</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .stats-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Tableau des Statistiques</h1>
+        <div class="stats-container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <table class="table table-striped table-bordered text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Montant Total des Ventes</th>
+                                <th>Nombre de Plats Servis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="totalSales">5000 €</td>
+                                <td id="totalDishes">150</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <canvas id="statsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateStats() {
+            fetchStatistiques().then(data => {
+                document.getElementById('totalSales').innerText = data.totalSales + ' €';
+                document.getElementById('totalDishes').innerText = data.totalDishesServed;
+                
+                statsChart.data.datasets[0].data = [data.totalSales, data.totalDishesServed];
+                statsChart.update();
+            });
+        }
+
+        function fetchStatistiques() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        totalSales: 5000,
+                        totalDishesServed: 150
+                    });
+                }, 1000);
+            });
+        }
+
+        const ctx = document.getElementById('statsChart').getContext('2d');
+        const statsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Montant Total des Ventes', 'Nombre de Plats Servis'],
+                datasets: [{
+                    label: 'Statistiques des ventes',
+                    data: [5000, 150],
+                    backgroundColor: ['#007bff', '#28a745']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        window.onload = updateStats;
+    </script>
+</body>
+</html>

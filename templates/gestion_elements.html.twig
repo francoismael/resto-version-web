@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Éléments</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Gestion des Éléments</h1>
+
+        <!-- Gestion des Ingrédients -->
+        <section class="mb-4 text-center">
+            <h2 class="mb-3">Ingrédients</h2>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Stock Initial</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tomates</td>
+                        <td>100</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary mt-3" onclick="ajouterIngredient()">Ajouter Ingrédient</button>
+        </section>
+
+        <hr class="my-4 border-2 border-dark"> <!-- Ligne de séparation -->
+
+        <!-- Gestion des Plats -->
+        <section class="mb-4 text-center">
+            <h2 class="mb-3">Plats</h2>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Temps de Cuisson (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pizza</td>
+                        <td>15 secondes</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success mt-3" onclick="ajouterPlat()">Ajouter Plat</button>
+        </section>
+
+        <hr class="my-4 border-2 border-dark"> <!-- Ligne de séparation -->
+
+        <!-- Gestion des Recettes -->
+        <section class="mb-4 text-center">
+            <h2 class="mb-3">Recettes</h2>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Plat</th>
+                        <th>Ingrédient</th>
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pizza Margherita</td>
+                        <td>Tomates</td>
+                        <td>50g</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-warning mt-3" onclick="ajouterRecette()">Ajouter Recette</button>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function ajouterIngredient() {
+            alert('Ajouter un ingrédient via l\'API');
+        }
+
+        function ajouterPlat() {
+            alert('Ajouter un plat via l\'API');
+        }
+
+        function ajouterRecette() {
+            alert('Ajouter une recette via l\'API');
+        }
+    </script>
+</body>
+</html>

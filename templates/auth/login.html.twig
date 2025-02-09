@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <link href="{{ asset('assets/css/sty.css') }}" rel="stylesheet">
+    <div class="container">
+        <h1>Connexion</h1>
+        <form method="post">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Se connecter</button>
+        </form>
+
+        <p>Pas encore inscrit ? <a href="{{ path('auth_register') }}">S'inscrire</a></p>
+    </div>
+{% endblock %}

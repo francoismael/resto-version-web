@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Éléments{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Gestion des Éléments</h1>
+        
+        <!-- Gestion des Ingrédients -->
+        <section class="section">
+            <h2>Ingrédients</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Stock Initial</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingredient in ingredients %}
+                        <tr>
+                            <td>{{ ingredient.name }}</td>
+                            <td>{{ ingredient.stock }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Ici vous pouvez intégrer l'API pour afficher et mettre à jour les ingrédients -->
+            <button onclick="ajouterIngredient()">Ajouter Ingrédient</button>
+        </section>
+
+        <!-- Gestion des Plats -->
+        <section class="section">
+            <h2>Plats</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Temps de Cuisson (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dish in dishes %}
+                        <tr>
+                            <td>{{ dish.name }}</td>
+                            <td>{{ dish.cookingTime }} secondes</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Ici vous pouvez intégrer l'API pour afficher et mettre à jour les plats -->
+            <button onclick="ajouterPlat()">Ajouter Plat</button>
+        </section>
+
+        <!-- Gestion des Recettes -->
+        <section class="section">
+            <h2>Recettes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Plat</th>
+                        <th>Ingrédient</th>
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipes %}
+                        <tr>
+                            <td>{{ recipe.dish.name }}</td>
+                            <td>{{ recipe.ingredient.name }}</td>
+                            <td>{{ recipe.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Ici vous pouvez intégrer l'API pour afficher et mettre à jour les recettes -->
+            <button onclick="ajouterRecette()">Ajouter Recette</button>
+        </section>
+    </div>
+{% endblock %}

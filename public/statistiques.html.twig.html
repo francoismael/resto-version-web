@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau des Statistiques{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Tableau des Statistiques</h1>
+        
+        <section class="section">
+            <h2>Statistiques des Ventes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Montant Total des Ventes</th>
+                        <th>Nombre de Plats Servis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ statistics.totalSales }} €</td>
+                        <td>{{ statistics.totalDishesServed }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Intégration des API pour récupérer et afficher les statistiques -->
+        </section>
+    </div>
+{% endblock %}

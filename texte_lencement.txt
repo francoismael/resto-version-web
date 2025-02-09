@@ -1,0 +1,138 @@
+E6D7C2
+C8BCAD
+191A18
+7CB5B1
+D0875F
+php -S 127.0.0.1:8000 -t public
+
+LES FONCTIONNALITE:
+-Application web:
+    .login
+    .gestion des element necessaires
+        -ingredients avec un stock initiale
+        -plat(temps dde cuison en seconde)
+        -recette
+    .tableau statistiques:
+        -montant totale des ventes
+        -nombre de plat servie
+l application web permet d avoir les statistiques et voir les commande en cours
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    phone VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE dishes (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    cooking_time INT,
+    price DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE ingredients (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    stock INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    status VARCHAR(50),
+    total_price DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE order_details (
+    id SERIAL PRIMARY KEY,
+    order_id INT,
+    dish_id INT,
+    quantity INT NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (dish_id) REFERENCES dishes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE statistics (
+    id SERIAL PRIMARY KEY,
+    total_sales DECIMAL(10,2),
+    total_dishes_served INT,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+-- Insérer des ingrédients avec un stock initial
+INSERT INTO ingredients (name, stock) VALUES
+    ('Tomate', 50),
+    ('Oignon', 30),
+    ('Viande', 20),
+    ('Pâtes', 40),
+    ('Fromage', 25),
+    ('Poulet', 35),
+    ('Riz', 45);
+
+-- Insérer des ingrédients avec un stock initial
+INSERT INTO ingredients (name, stock) VALUES
+    ('Tomate', 50),
+    ('Pâte', 40),
+    ('Oignon', 30),
+    ('Bouillon de soupe', 20),
+    ('Fromage', 25),
+    ('Pain', 35),
+    ('Charcuterie', 20),
+    ('Riz', 45),
+    ('Porc', 25),
+    ('Oeuf', 30);
+
+-- Insérer des plats avec un temps de cuisson en secondes
+INSERT INTO dishes (name, description, cooking_time, price) VALUES
+    ('Spaghetti Bolognaise', 'Pâtes avec sauce bolognaise', 1200, 12.50),
+    ('Riz Cantonnais', 'Riz sauté avec légumes et viande', 900, 10.00),
+    ('Pizza Margherita', 'Pizza avec sauce tomate et fromage', 1500, 15.00),
+    ('Sandwich Charcuterie', 'Pain garni de charcuterie et fromage', 600, 8.50),
+    ('Soupe aux Oignons', 'Soupe à base de bouillon et oignons', 900, 7.50);
+
+-- Table des recettes pour lier les plats aux ingrédients
+CREATE TABLE IF NOT EXISTS recipes (
+    id SERIAL PRIMARY KEY,
+    dish_id INT,
+    ingredient_id INT,
+    quantity INT NOT NULL, -- Quantité nécessaire par portion
+    FOREIGN KEY (dish_id) REFERENCES dishes(id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id) ON DELETE CASCADE
+);
+
+-- Insérer les relations recette (plats et ingrédients nécessaires)
+INSERT INTO recipes (dish_id, ingredient_id, quantity) VALUES
+    (1, 1, 3), -- Spaghetti Bolognaise : 3 tomates
+    (1, 2, 1), -- Spaghetti Bolognaise : 1 portion de pâte
+    (1, 3, 1), -- Spaghetti Bolognaise : 1 oignon
+    (2, 8, 1), -- Riz Cantonnais : 1 portion de riz
+    (2, 3, 1), -- Riz Cantonnais : 1 oignon
+    (2, 10, 2), -- Riz Cantonnais : 2 œufs
+    (3, 1, 2), -- Pizza Margherita : 2 tomates
+    (3, 5, 2), -- Pizza Margherita : 2 portions de fromage
+    (4, 6, 2), -- Sandwich Charcuterie : 2 tranches de pain
+    (4, 7, 3), -- Sandwich Charcuterie : 3 tranches de charcuterie
+    (4, 5, 1), -- Sandwich Charcuterie : 1 portion de fromage
+    (5, 3, 2), -- Soupe aux Oignons : 2 oignons
+    (5, 4, 1); -- Soupe aux Oignons : 1 bouillon de soupe
+
+
+
